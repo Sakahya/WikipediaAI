@@ -330,3 +330,37 @@ function getCommandList() {
         </ul>
     `;
 }
+
+// Function to enhance text
+async function improveText(text) {
+    // Simulating an enhancement process for the provided text
+    const enhancedText = text
+        .replace(/(\.\s+)/g, '. ') // Ensure proper spacing after periods
+        .replace(/\s+/g, ' ') // Remove extra spaces
+        .trim(); // Trim leading and trailing whitespace
+
+    // Enhance vocabulary and fix grammatical issues
+    const vocabularyEnhancedText = enhancedText
+        .replace(/improve/g, 'ameliorate')
+        .replace(/use/g, 'utilize')
+        .replace(/make/g, 'render')
+        .replace(/good/g, 'commendable')
+        .replace(/bad/g, 'detrimental')
+        .replace(/help/g, 'assist')
+        .replace(/very/g, 'exceedingly');
+
+    // Return the enhanced paragraph
+    return `Here is the enhanced paragraph:\n\n"${vocabularyEnhancedText}"`;
+}
+
+// Update the handleCommand function to handle the /improve command
+async function handleCommand(command) {
+    const [cmd, ...args] = command.split(" ");
+    const arg = args.join(" "); // Join the remaining arguments back into a single string
+    switch (cmd) {
+        case "/improve":
+            return await improveText(arg);
+        default:
+            return "I'm sorry, I couldn't understand that command.";
+    }
+}
